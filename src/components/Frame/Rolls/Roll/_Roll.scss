@@ -1,0 +1,17 @@
+
+.Roll{
+    float: left;
+    width: 50%;
+    text-align: center;
+
+    &--last-frame{
+        width: 33.33%;
+        float: left !important;
+    }
+    & > &__number{
+        font-size: 12px;
+    }
+    & > &__score{
+        font-size: 12px;
+    }
+}
