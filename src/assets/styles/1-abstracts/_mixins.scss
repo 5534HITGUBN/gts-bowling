@@ -1,0 +1,14 @@
+@mixin box-padding($x: 0, $y: 0){
+    box-sizing: border-box;
+    padding: $x $y;
+}
+@mixin center-block($x : 0){
+    margin: $x auto;
+    display: block;
+}
+@mixin shadows($x : 5px, $y: 5px, $blur: 5px) {
+    box-shadow: $x $y $blur rgba(0,0,0,.2);
+}
+@mixin transitions(){
+    transition: all .5s;
+}

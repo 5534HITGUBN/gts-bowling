@@ -6,10 +6,11 @@ import FrameScore from './FrameScore/FrameScore';
 const Frame = (props) => {
     return (
         <div className="Frame">
-            <span>{`Frame: ${props.frameNumber}`}</span>
+            <div className="Frame__frame-number">{`Frame ${props.frameNumber} :`}</div>
+            <div className={props.currentFrame+1 === props.frameNumber ? 'Frame__frame-indicator  Frame__frame-indicator--active' : 'Frame__frame-indicator' }></div>
             <div className="Frame__content">
                 <Rolls frameData={props.frameData} lastFrame={props.lastFrame}/> 
-                <FrameScore frameScore={props.frameData.totalScore}/>
+                <FrameScore frameData={props.frameData}/>
             </div>
         </div>
     );

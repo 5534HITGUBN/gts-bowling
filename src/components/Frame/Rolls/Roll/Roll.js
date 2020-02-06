@@ -43,7 +43,9 @@ const Roll = (props) => {
                 <span>Roll {props.rollNumber}</span>
             </div>
             <div className="Roll__score">
-                <span>Score: {alias(props.rollNumber)}</span>
+                <div className="Roll__score__inner-con">
+                    <div>{alias(props.rollNumber)}</div>
+                </div>
             </div>
         </div>
     );

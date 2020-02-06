@@ -1,19 +1,40 @@
 .Frame{
+    @include box-padding(5px 5px);
+    @include transitions;
     width: 125px;
-    height: 125px;
+    height: 250px;
     float: left;
     margin:0 5px;
     clear: right;
-    & > span{
+    background-color: rgba(32, 2, 2, 0.2);
+    border-radius: $border-radius;
+    &__frame-number{
+        text-align: center;
+        color: $color-white;
+        font-family: $font-main;
+        font-weight: $font-weight-medium;
         display: block;
-        font-size: 13px;
+        font-size: 14px;
         margin: 5px 0;
     }
-&__content{
-   
-    background-color: #fafafa;
-    border: solid 1px #ccc;
-
-}
+    &__frame-indicator{
+        @include center-block(15px);
+        border-radius: 50%;
+        height: 15px;
+        width: 15px;
+        background-color: $color-white;
+        &--active{
+            background-color: $color-4;
+        }
+    }
+    &:hover{
+       transform: scale(1.1);
+       @include shadows();
+    }
+    @media only screen and (max-width: $tablet){
+        width: 50%;
+        @include center-block;
+        margin: 10px auto;
+     }
 
 }

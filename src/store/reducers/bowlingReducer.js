@@ -66,7 +66,9 @@ const bowlingReducer = (state = initialState, action) => {
                 restartGame: action.payload.restartGame,
                 currentFrame: 0,
                 player1: {
-                    frames: []
+                    frames: [
+                        
+                    ]
                 }
             }
     }
