@@ -9,9 +9,7 @@ import Messaging from '../../components/Messaging/Messaging';
 import GameControls from '../../components/GameControls/GameControls';
 import Aux from '../../hoc/Aux/Aux';
 class Bowling extends Component {
-
     // REQUIREMENT 1. 
-    // Start, which starts a new game of bowling 
     start(e) {
         // e.preventDefault(); 
         const frame = {
@@ -248,7 +246,6 @@ class Bowling extends Component {
 }
 const mapStateToProps = state => {
     return {
-
         restartGame: state.bowling.restartGame,
         gameFrameTotal: state.bowling.gameFrameTotal,
         gameActive: state.bowling.gameActive,
