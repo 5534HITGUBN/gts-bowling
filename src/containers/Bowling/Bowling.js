@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as reduxAction from '../../store/actions/index';
-
 import Scoreboard from '../../components/Scoreboard/Scoreboard';
 import Header from '../../components/Header/Header';
 import Messaging from '../../components/Messaging/Messaging';
@@ -105,9 +104,9 @@ class Bowling extends Component {
             // Select the targeted frame & update the Frame score. 
             // Sums the total frames -> if a strike or spare adds 10 points 
             const addValues = (targetedFrames, bonus, currentFrameIdx) => {
-                //// Calculate Frame Score
+                // Calculates a frame score
                 let currentFrameScore = reduceArr(targetedFrames, bonus);
-                //// Update the Frame Score. 
+                //// Updates the frame based on index with the score. 
                 updateframeScore(currentFrameIdx, currentFrameScore);
             }
             const updateframeScore = (targetFrame, currentFrameScore) => {
@@ -122,9 +121,10 @@ class Bowling extends Component {
                 return baseScore + additionalPoints;
             }
             const scoreBasedOnRolls = (roll) => {
-       
+          
                 switch (roll) {
-                    // NORMAL
+                    // roll type on most right refers to current frame,
+                    // text on left refers to prvious frames. 
                     case 'strike-normal':
                     case 'normal-strike-normal':
                     case 'spare-strike-normal':
@@ -132,11 +132,9 @@ class Bowling extends Component {
                         break;
                     case 'strike':
                     case 'strike-strike':
-                    // case 'strike-spare':
                         // Do nothing - more data / rolls are required 
                         break;
                     case 'strike-spare':
-                        // 3 strikes in a row... 
                         addValues(updatedFrames[currentFrame].rolls, 20, currentFrame - 1);
                         break;
                     case 'strike-strike-strike':
@@ -150,12 +148,12 @@ class Bowling extends Component {
                     case 'strike-normal-normal':
                         addValues(updatedFrames[currentFrame].rolls, 10, currentFrame - 2);
                         break;
-                    case 'strike-spare-normal':
-           
-                        addValues(updatedFrames[currentFrame-1].rolls, 10, currentFrame - 2);
-                        break;
                     case 'strike-spare-spare':
-                        addValues([updatedFrames[currentFrame].rolls[0]], 20, currentFrame - 2);
+                    case 'strike-spare-normal':
+                        //this was a triky one :)
+                        // update the for the strike that 
+                        addValues(updatedFrames[currentFrame -1].rolls, 10, currentFrame - 2);
+                        addValues([updatedFrames[currentFrame].rolls[0]], 10, currentFrame - 1);
                         break;
                     case 'spare-normal':
                     case 'spare-normal-normal':
