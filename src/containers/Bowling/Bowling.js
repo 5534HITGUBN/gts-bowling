@@ -205,7 +205,7 @@ class Bowling extends Component {
   
                 if ((firstPreviousRoll === 'strike' || firstPreviousRoll === 'spare') && this.props.currentFrame >= 2) {
                     let secondPreviousRoll = rollTypeValues(this.props.currentFrame - 2);
-                    console.log(secondPreviousRoll);
+        
                     scoreBasedOnRolls(`${secondPreviousRoll}-${firstPreviousRoll}-${currentRoll}`);
                 }
                 else {

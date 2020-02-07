@@ -8,6 +8,10 @@
     clear: right;
     background-color: rgba(32, 2, 2, 0.4);
     border-radius: $border-radius;
+    @media only screen and (max-width: $mobile){
+        height: 220px;
+        width: 200px;
+     }
     &--hidden-mobile{
         @media only screen and (max-width: $tablet){
             display: none !important;
