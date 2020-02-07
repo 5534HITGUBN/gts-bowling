@@ -225,7 +225,6 @@ class Bowling extends Component {
         }
         updatedFrames[this.props.currentFrame] = frame;
         this.props.totalScoreAction(updatedFrames);
-
         // FINAL FRAME: 
         let rollTypes = frame.rolls.map(cur => cur.type);
         let finalRollAmounts = rollTypes.includes('strike') || rollTypes.includes('spare') ? 3 : 2;
