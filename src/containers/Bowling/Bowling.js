@@ -9,6 +9,7 @@ import GameControls from '../../components/GameControls/GameControls';
 
 class Bowling extends Component {
     // REQUIREMENT 1. 
+    // starts a new game of bowling 
     start(e) {
         // e.preventDefault(); 
         const frame = {

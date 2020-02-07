@@ -1,6 +1,4 @@
 export const SHOW_STATE = 'SHOW_STATE';
-export const TESTING_ACTION = 'TESTING_ACTION';
-
 //*** GLOBAL ***/
 export const CREATE_FRAMES = 'CREATE_FRAMES';
 export const SCORE_BY_FRAME = 'SCORE_BY_FRAME'; 
