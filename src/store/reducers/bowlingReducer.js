@@ -1,6 +1,6 @@
 import * as actionsTypes from '../actions/actionsTypes';
 const initialState = {
-    gameFrameTotal: 1,
+    gameFrameTotal: 10,
     gameActive: false,
     restartGame: false,
     currentFrame: 0,
