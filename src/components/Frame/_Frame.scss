@@ -41,7 +41,7 @@
        @include shadows();
     }
     @media only screen and (max-width: $tablet){
-        width: 50%;
+        width: 40%;
         @include center-block;
         margin: 10px auto;
      }
