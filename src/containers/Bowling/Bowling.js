@@ -139,7 +139,7 @@ class Bowling extends Component {
                         break;
                     case 'strike-strike-strike':
                         // 3 strikes in a row... 
-                        addValues(updatedFrames[currentFrame].rolls, 30, currentFrame - 2);
+                        addValues(updatedFrames[currentFrame].rolls, 20, currentFrame - 2);
                         break;
                     case 'strike-strike-normal':
                         // 2 strikes in a row... 
@@ -150,7 +150,7 @@ class Bowling extends Component {
                         break;
                     case 'strike-spare-spare':
                     case 'strike-spare-normal':
-                        //this was a triky one :)
+                        // this was a triky one :)
                         // update the for the strike that 
                         addValues(updatedFrames[currentFrame -1].rolls, 10, currentFrame - 2);
                         addValues([updatedFrames[currentFrame].rolls[0]], 10, currentFrame - 1);
