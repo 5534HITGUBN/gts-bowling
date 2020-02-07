@@ -122,6 +122,7 @@ class Bowling extends Component {
                 return baseScore + additionalPoints;
             }
             const scoreBasedOnRolls = (roll) => {
+       
                 switch (roll) {
                     // NORMAL
                     case 'strike-normal':
@@ -136,22 +137,32 @@ class Bowling extends Component {
                         break;
                     case 'strike-spare':
                         // 3 strikes in a row... 
-                        addValues(updatedFrames[currentFrame].rolls, 20, (currentFrame - 1));
+                        addValues(updatedFrames[currentFrame].rolls, 20, currentFrame - 1);
                         break;
                     case 'strike-strike-strike':
                         // 3 strikes in a row... 
-                        addValues(updatedFrames[currentFrame].rolls, 30, (currentFrame - 2));
+                        addValues(updatedFrames[currentFrame].rolls, 30, currentFrame - 2);
                         break;
                     case 'strike-strike-normal':
                         // 2 strikes in a row... 
                         addValues([updatedFrames[currentFrame].rolls[0]], 20, currentFrame - 2);
                         break;
+                    case 'strike-normal-normal':
+                        addValues(updatedFrames[currentFrame].rolls, 10, currentFrame - 2);
+                        break;
                     case 'strike-spare-normal':
+           
+                        addValues(updatedFrames[currentFrame-1].rolls, 10, currentFrame - 2);
+                        break;
+                    case 'strike-spare-spare':
                         addValues([updatedFrames[currentFrame].rolls[0]], 20, currentFrame - 2);
                         break;
                     case 'spare-normal':
+                    case 'spare-normal-normal':
+                    case 'normal-spare-normal':
                         addValues([updatedFrames[currentFrame].rolls[0]], 10, currentFrame - 1);
                         break;
+                    case 'spare-spare-normal':
                     case 'spare-strike': 
                         addValues([updatedFrames[currentFrame].rolls[0]], 10, currentFrame - 1);
                         break;
@@ -172,6 +183,7 @@ class Bowling extends Component {
                         val = 'spare';
                         break;
                     case 'strike-':
+                    case 'strike-normal':
                         val = 'strike';
                         break;
                     default:
@@ -191,7 +203,7 @@ class Bowling extends Component {
             if (this.props.currentFrame >= 1) {
                 const firstPreviousRoll = rollTypeValues(this.props.currentFrame - 1);
   
-                if (firstPreviousRoll === 'strike' && this.props.currentFrame >= 2) {
+                if ((firstPreviousRoll === 'strike' || firstPreviousRoll === 'spare') && this.props.currentFrame >= 2) {
                     let secondPreviousRoll = rollTypeValues(this.props.currentFrame - 2);
                     console.log(secondPreviousRoll);
                     scoreBasedOnRolls(`${secondPreviousRoll}-${firstPreviousRoll}-${currentRoll}`);
