@@ -6,7 +6,7 @@ import Scoreboard from '../../components/Scoreboard/Scoreboard';
 import Header from '../../components/Header/Header';
 import Messaging from '../../components/Messaging/Messaging';
 import GameControls from '../../components/GameControls/GameControls';
-
+import Aux from '../../hoc/Aux/Aux';
 class Bowling extends Component {
     // REQUIREMENT 1. 
     // starts a new game of bowling 
@@ -153,7 +153,7 @@ class Bowling extends Component {
                         addValues([updatedFrames[currentFrame].rolls[0]], 10, currentFrame - 1);
                         break;
                     case 'spare-strike': 
-                        addValues([updatedFrames[currentFrame].rolls[0]], 20, currentFrame - 1);
+                        addValues([updatedFrames[currentFrame].rolls[0]], 10, currentFrame - 1);
                         break;
                     default:
                         addValues(updatedFrames[currentFrame].rolls, 0, currentFrame);
@@ -228,12 +228,13 @@ class Bowling extends Component {
     }
     render() {
         return (
-            <div>
+            <Aux>
+                <div></div>
                 <Header frames={this.props.player1.frames} currentFrame={this.props.currentFrame} />
                 <Scoreboard player1={this.props.player1} currentFrame={this.props.currentFrame} />
                 <Messaging restartGame={this.props.restartGame} frames={this.props.frames} gameFrameTotal={this.props.gameFrameTotal} />
                 <GameControls restartGame={this.props.restartGame} restartGameAction={this.props.endGameAction} gameActive={this.props.gameActive} start={()=>this.start()} roll={(e)=>this.roll(e)}/>
-            </div>
+            </Aux>
         );
     }
 }

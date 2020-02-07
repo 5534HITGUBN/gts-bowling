@@ -1,9 +1,19 @@
 body {
     background-color: $color-3;
-    margin: 0 auto;
-    padding: 0px;
-    background-image: url('https://bowling-app.s3.amazonaws.com/background-lg.jpg');
-    background-repeat: none;
+    // margin: 0px;
+    // padding: 0px;
+    // background-image: url('https://bowling-app.s3.amazonaws.com/background-lg.jpg');
+    // background-repeat: none;
     
 
+}
+html {
+    box-sizing: border-box;
+  }
+  *, *::before, *::after {
+    box-sizing: border-box;
+  }
+body, html {
+    margin: 0px;
+    padding: 0px;
 }
