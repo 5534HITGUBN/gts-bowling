@@ -4,13 +4,13 @@ $color-2:#3c3972;
 $color-3:#222240;
 $color-4:#f45227;
 $color-5:#ea1b1b;
-
+// Fonts 
 $font-main: 'Montserrat';
 $font-secondary: 'Exo';
 $font-weight-light: 200;
 $font-weight-medium: 400;
 $font-weight-bold: 700;
-
+// Neutrals
 $color-white: #fafafa;
 $color-gray-1:#e7e7e7;
 $color-gray-2:#dddddd;
@@ -20,7 +20,7 @@ $color-gray-5:#aaaaaa;
 $color-gray-6:#777777;
 $color-gray-7:#666666;
 $color-black: #333333;
-
+// iOS Navigation
 $color-ios-blue:rgb(0,122,255) ;
 $color-ios-green: rgb(48,209,88);
 $color-ios-purple: rgb(94,92,230);
@@ -30,9 +30,9 @@ $color-ios-purple: rgb(191,90,242);
 $color-ios-red: rgb(255,69,58);
 $color-ios-teal: rgb(100,210,255);
 $color-ios-yellow: rgb(255,214,10);
-
+// Border Radius
 $border-radius: 5px;
-
+// Breakpoints
 $desktop-2xl: 1450px;
 $desktop-xl: 1220px;
 $desktop: 992px;

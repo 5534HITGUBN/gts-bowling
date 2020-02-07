@@ -470,7 +470,7 @@ module.exports = function(webpackEnv) {
                   loader: require.resolve('sass-resources-loader'),
                   options: {
                     // Provide path to the file with resources
-                    resources: './src/assets/styles/_utils.scss',
+                    resources: './src/assets/styles/index.scss',
                     
                   },
                 },

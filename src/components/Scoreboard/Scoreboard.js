@@ -14,4 +14,3 @@ const Scoreboard = (props) => {
     );
 };
 export default Scoreboard;
-//TODO: do we the current frame seems redundant on the props

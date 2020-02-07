@@ -3,12 +3,7 @@ import Enzyme, {shallow} from 'enzyme';
 import EnzymeAdapter from 'enzyme-adapter-react-16';
 import {findByTestAttr, storeFactory} from '../../../test/testUtils';
 import ButtonLg from './ButtonLg';
-/** 
- * Return node(s) with the given data-test attribute.
- * @param {ShallowWrapper} wrapper - Enzyme shallow wrapper.
- * @param {string} val - Value of data-test attribute for search. 
- * @returns {ShallowWrapper} 
- */
+
 Enzyme.configure({adapter: new EnzymeAdapter});
 const setup = (initialState={}) => {
     const store = storeFactory(initialState);

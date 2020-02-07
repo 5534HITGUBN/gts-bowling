@@ -28,8 +28,7 @@ export const nextFrame = (currentFrame) => {
     }
 }
 export const totalScore = (updatedFrames) => {
-    console.log(`TOTAL SCORE ACTION`)
-    console.log(updatedFrames)
+
   return {
         type: actionTypes.TOTAL_SCORE,
         payload: {

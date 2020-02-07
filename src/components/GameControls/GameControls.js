@@ -1,6 +1,7 @@
 import React from 'react';
 import Aux from '../../hoc/Aux/Aux';
 import ButtonLg from '../../components/Buttons/ButtonLg/ButtonLg';
+import './_GameControls.scss';
 const GameControls = (props) => {
     const controls = () => {
         if (props.gameActive) {
@@ -12,9 +13,8 @@ const GameControls = (props) => {
             )
         }
     }
-    console.log(props.restartGame)
     return (
-        <div>
+        <div className="Game-Controls">
             <ButtonLg visible={!props.gameActive} click={props.start} text={'Start Game'} />
             {controls()}
         </div>

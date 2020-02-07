@@ -1,9 +1,19 @@
 import checkPropTypes from 'check-prop-types';
 import {createStore} from 'redux';
-import rootReducer from '../store/reducers/bowlingReducer';
-export const storeFactory = (initialState)=> {
-    return createStore(rootReducer, initialState);
+import bowlingReducer from '../store/reducers/bowlingReducer';
+
+/**
+ *Create a testing store with importd reducers, middleware, and initital state
+ * glovbal: bowling reducer
+ * @function setup
+ * @param {object} initialState - Initial state for the setup
+ * @returns {Store} - Redux store
+ */
+
+export const storeFactory = (initialState) => {
+    createStore(bowlingReducer, initialState)
 }
+
 /** 
  * Return node(s) with the given data-test attribute.
  * @param {ShallowWrapper} wrapper - Enzyme shallow wrapper.

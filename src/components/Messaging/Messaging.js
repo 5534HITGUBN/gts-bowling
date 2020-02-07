@@ -5,7 +5,7 @@ const Messaging = (props) => {
     if (props.restartGame) {
         return (
             <div className="Messaging">
-                <div><h2>{props.frames[props.gameFrameTotal - 1].totalScore < 100 ? '...Mulligan' : 'Like a BOSS!'}</h2></div>
+                <div><h2>{props.frames[props.gameFrameTotal - 1].totalScore < 100 ? 'Yikes...' : 'Like a BOSS!'}</h2></div>
             </div>
         );
     }

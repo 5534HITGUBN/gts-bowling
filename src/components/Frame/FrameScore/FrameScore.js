@@ -6,8 +6,6 @@ const FrameScore = (props) => {
             <span>Frame Score</span>
              { props.frameData.rollAttempts >= 2 ? props.frameData.frameScore : null}
         </div>
-       
     );
 };
-
 export default FrameScore;

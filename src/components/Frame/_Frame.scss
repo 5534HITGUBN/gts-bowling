@@ -6,8 +6,13 @@
     float: left;
     margin:0 5px;
     clear: right;
-    background-color: rgba(32, 2, 2, 0.2);
+    background-color: rgba(32, 2, 2, 0.4);
     border-radius: $border-radius;
+    &--hidden-mobile{
+        @media only screen and (max-width: $tablet){
+            display: none !important;
+        }
+    }
     &__frame-number{
         text-align: center;
         color: $color-white;

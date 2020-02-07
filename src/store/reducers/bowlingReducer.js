@@ -71,6 +71,7 @@ const bowlingReducer = (state = initialState, action) => {
                     ]
                 }
             }
+   
     }
     return state;
 }
