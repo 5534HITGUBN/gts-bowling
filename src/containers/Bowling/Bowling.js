@@ -131,51 +131,47 @@ class Bowling extends Component {
                 switch (roll) {
                     // roll type on most right refers to current frame,
                     // text on left refers to prvious frames. 
-                    case 'strike-normal':
-                    case 'normal-strike-normal':
-                        addValues(updatedFrames[currentFrame].rolls, 10, (currentFrame - 1));
-                        break;
-                    case 'spare-strike-normal':
-                        addValues(updatedFrames[currentFrame].rolls, 10, (currentFrame - 1));
-                        addValues(updatedFrames[currentFrame - 1].rolls, 10, (currentFrame - 2));
-                        break;
+                    /// LF:
                     case 'normal-strike':
                         addValues([updatedFrames[currentFrame].rolls[0]], 10, (currentFrame));
                         addValues(updatedFrames[currentFrame].rolls, 10, (currentFrame));
                         break;
                     case 'strike':
                     case 'strike-strike':
-                        // Do nothing - more data / rolls are required 
-                        break;
                     case 'strike-spare':
-                        addValues(updatedFrames[currentFrame].rolls, 20, currentFrame - 1);
+                        // Do nothing - more data / rolls are required 
                         break;
                     case 'strike-strike-strike':
                         // 3 strikes in a row... 
-                        addValues(updatedFrames[currentFrame].rolls, 20, currentFrame - 2);
+                        addValues(updatedFrames[currentFrame].rolls, 20, (currentFrame - 2));
                         break;
-                    case 'strike-strike-normal':
-                        // 2 strikes in a row... 
-                        addValues([updatedFrames[currentFrame].rolls[0]], 20, currentFrame - 2);
+                    case 'strike-normal':
+                    case 'normal-strike-normal':
+                    case 'spare-normal-strike':
+                    case 'strike-strike-normal': 
+                        addValues(updatedFrames[currentFrame].rolls, 10, (currentFrame - 1));
                         break;
-                    case 'strike-normal-normal':
-                        addValues(updatedFrames[currentFrame - 1].rolls, 10, currentFrame - 1);
-                        addValues(updatedFrames[currentFrame].rolls, 10, currentFrame - 2);
+                    case 'spare-strike-spare':
+                        addValues(updatedFrames[currentFrame].rolls, 20, (currentFrame - 1));
                         break;
+                    case 'spare-spare-strike':
                     case 'strike-strike-spare':
+                    case 'spare-strike-normal':
+                    case 'strike-spare-strike':
+                        // Calulates & Updates the Middle - Strike or spare
+                        addValues(updatedFrames[currentFrame].rolls, 10, (currentFrame - 1));
+                        // Calulates & Updates the Prev - Spare 
+                        addValues(updatedFrames[currentFrame - 1].rolls, 10, (currentFrame - 2));
+                        break;
+                    // case 'strike-normal-normal':
                     case 'strike-spare-spare':
-                        addValues(updatedFrames[currentFrame - 1].rolls, 10, currentFrame - 2);
-                        addValues(updatedFrames[currentFrame].rolls, 10, currentFrame);
-                        break;
-                    case 'spare-spare-normal':
-                        addValues(updatedFrames[currentFrame - 1].rolls, 10, currentFrame - 2); 
-                        addValues([updatedFrames[currentFrame].rolls[0]], 10, currentFrame - 1); 
-                        break;
+                    case 'strike-spare-normal':
                     case 'spare-normal':
                     case 'spare-normal-normal':
+                    case 'spare-spare-normal':
                     case 'normal-spare-normal':
                     case 'spare-strike': 
-                        addValues([updatedFrames[currentFrame].rolls[0]], 10, currentFrame - 1);
+                        addValues([updatedFrames[currentFrame].rolls[0]], 10, (currentFrame - 1));
                         break;
                     default:
                         addValues(updatedFrames[currentFrame].rolls, 0, currentFrame);
