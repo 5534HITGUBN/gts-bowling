@@ -6,6 +6,7 @@ import Header from '../../components/Header/Header';
 import Messaging from '../../components/Messaging/Messaging';
 import GameControls from '../../components/GameControls/GameControls';
 import Aux from '../../hoc/Aux/Aux';
+
 class Bowling extends Component {
     // REQUIREMENT 1. 
     // starts a new game of bowling 
@@ -20,8 +21,8 @@ class Bowling extends Component {
                 { type: null, value: 0},
             ]
         }
-        // Last Frame
-        // Game is setup so game duration is the same & 
+        // Last Frame - this only displays if either of the first two rolls on the last frame are a spare or strike. 
+        // Game is setup so game duration is the sam
         const lastFrame = {
             ...frame,
             rolls: [
@@ -43,12 +44,13 @@ class Bowling extends Component {
             // Final Frame & 1st or 2nd Roll are not normal
             if (this.props.currentFrame === (this.props.gameFrameTotal - 1)) {
                 const finalRollTypes = this.props.player1.frames[this.props.currentFrame].rolls.map(cur=>{return cur.type});
-                finalRollTypes.includes('spare', 'strike') ?    value = 20 : value = 10
+                console.log(`final roll types: ${finalRollTypes}`)
+                finalRollTypes.includes('spare', 'strike') ? value = 20 : value = 10
             }
             return value
         }
-        let possiblePoints = remainingPoints() - rollValues.reduce((acc, cur) => { return acc + cur });
-        let knockedPins = Math.ceil(Math.random() * possiblePoints);
+        const possiblePoints = remainingPoints() - rollValues.reduce((acc, cur) => { return acc + cur });
+        const knockedPins = Math.ceil(Math.random() * possiblePoints);
         this.scoreByFrame(knockedPins);
     }
     // REQUIREMENT 3: 
@@ -84,10 +86,16 @@ class Bowling extends Component {
             //  UPDATES THE FRAME WITH THE ROLL
             let updatedFrame = { ...this.props.player1.frames[this.props.currentFrame] };
             //  we need to set strike roll attempts to 2 for displaying the score properly. 
-            const frameIncrement = rollType() === 'strike' ? 2 : 1
+            const rollIncrement = ()=>{
+                let value = 1;
+                if (rollType() === 'strike' && (this.props.currentFrame !== this.props.gameFrameTotal - 1)){
+                    value = 2;
+                }
+                return value;
+            }   
             updatedFrame = {
                 ...updatedFrame,
-                rollAttempts: rollAttempt += frameIncrement,
+                rollAttempts: rollAttempt += rollIncrement(),
                 rolls: updatedRolls
             }
             const updatedFrames = [...this.props.player1.frames];
@@ -121,14 +129,23 @@ class Bowling extends Component {
                 return baseScore + additionalPoints;
             }
             const scoreBasedOnRolls = (roll) => {
-          
+                console.log(`score based on roll ${roll}`);
                 switch (roll) {
+   
                     // roll type on most right refers to current frame,
                     // text on left refers to prvious frames. 
                     case 'strike-normal':
                     case 'normal-strike-normal':
+                        addValues(updatedFrames[currentFrame].rolls, 10, (currentFrame - 1));
+                        break;
                     case 'spare-strike-normal':
                         addValues(updatedFrames[currentFrame].rolls, 10, (currentFrame - 1));
+                        addValues(updatedFrames[currentFrame - 1].rolls, 10, (currentFrame - 2));
+                        break;
+                    case 'normal-strike':
+                        addValues([updatedFrames[currentFrame].rolls[0]], 10, (currentFrame));
+                        addValues(updatedFrames[currentFrame].rolls, 10, (currentFrame));
+                  
                         break;
                     case 'strike':
                     case 'strike-strike':
@@ -146,21 +163,21 @@ class Bowling extends Component {
                         addValues([updatedFrames[currentFrame].rolls[0]], 20, currentFrame - 2);
                         break;
                     case 'strike-normal-normal':
+                        addValues(updatedFrames[currentFrame - 1].rolls, 10, currentFrame - 1);
                         addValues(updatedFrames[currentFrame].rolls, 10, currentFrame - 2);
                         break;
+                    case 'strike-strike-spare':
                     case 'strike-spare-spare':
-                    case 'strike-spare-normal':
-                        // this was a triky one :)
-                        // update the for the strike that 
-                        addValues(updatedFrames[currentFrame -1].rolls, 10, currentFrame - 2);
-                        addValues([updatedFrames[currentFrame].rolls[0]], 10, currentFrame - 1);
+                        addValues(updatedFrames[currentFrame - 1].rolls, 10, currentFrame - 2);
+                        addValues(updatedFrames[currentFrame].rolls, 10, currentFrame);
+                        break;
+                    case 'spare-spare-normal':
+                        addValues(updatedFrames[currentFrame - 1].rolls, 10, currentFrame - 2); 
+                        addValues([updatedFrames[currentFrame].rolls[0]], 10, currentFrame - 1); 
                         break;
                     case 'spare-normal':
                     case 'spare-normal-normal':
                     case 'normal-spare-normal':
-                        addValues([updatedFrames[currentFrame].rolls[0]], 10, currentFrame - 1);
-                        break;
-                    case 'spare-spare-normal':
                     case 'spare-strike': 
                         addValues([updatedFrames[currentFrame].rolls[0]], 10, currentFrame - 1);
                         break;
@@ -170,6 +187,7 @@ class Bowling extends Component {
             }
             // creates overall frame roll type
             const convertToSingleType = (val) => {
+                console.log(`Value to be converted : ${val}`);
                 switch (val) {
                     // normal -- without a second roll
                     case 'normal-':
@@ -182,6 +200,8 @@ class Bowling extends Component {
                         break;
                     case 'strike-':
                     case 'strike-normal':
+                    case 'strike-normal-':
+                    case 'strike--normal':
                         val = 'strike';
                         break;
                     default:
@@ -196,14 +216,11 @@ class Bowling extends Component {
                 return value
             }
             const currentRoll = rollTypeValues(this.props.currentFrame);
-        
             scoreBasedOnRolls(`${currentRoll}`);
             if (this.props.currentFrame >= 1) {
                 const firstPreviousRoll = rollTypeValues(this.props.currentFrame - 1);
-  
                 if ((firstPreviousRoll === 'strike' || firstPreviousRoll === 'spare') && this.props.currentFrame >= 2) {
                     let secondPreviousRoll = rollTypeValues(this.props.currentFrame - 2);
-        
                     scoreBasedOnRolls(`${secondPreviousRoll}-${firstPreviousRoll}-${currentRoll}`);
                 }
                 else {
