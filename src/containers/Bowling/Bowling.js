@@ -129,13 +129,7 @@ class Bowling extends Component {
             }
             const scoreBasedOnRolls = (roll) => {
                 switch (roll) {
-                    // roll type on most right refers to current frame,
-                    // text on left refers to prvious frames. 
-                    /// LF:
                     case 'normal-strike':
-                        addValues([updatedFrames[currentFrame].rolls[0]], 10, (currentFrame));
-                        addValues(updatedFrames[currentFrame].rolls, 10, (currentFrame));
-                        break;
                     case 'strike':
                     case 'strike-strike':
                     case 'strike-spare':
@@ -151,22 +145,17 @@ class Bowling extends Component {
                     case 'strike-strike-normal': 
                         addValues(updatedFrames[currentFrame].rolls, 10, (currentFrame - 1));
                         break;
+                    case 'strike-spare-spare':
                     case 'spare-strike-spare':
-                        addValues(updatedFrames[currentFrame].rolls, 20, (currentFrame - 1));
-                        break;
                     case 'spare-spare-strike':
-                    case 'strike-strike-spare':
                     case 'spare-strike-normal':
+                    case 'strike-strike-spare':
                     case 'strike-spare-strike':
-                        // Calulates & Updates the Middle - Strike or spare
                         addValues(updatedFrames[currentFrame].rolls, 10, (currentFrame - 1));
-                        // Calulates & Updates the Prev - Spare 
                         addValues(updatedFrames[currentFrame - 1].rolls, 10, (currentFrame - 2));
                         break;
-                    // case 'strike-normal-normal':
-                    case 'strike-spare-spare':
-                    case 'strike-spare-normal':
                     case 'spare-normal':
+                    case 'strike-spare-normal':
                     case 'spare-normal-normal':
                     case 'spare-spare-normal':
                     case 'normal-spare-normal':
