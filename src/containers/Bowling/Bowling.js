@@ -44,7 +44,6 @@ class Bowling extends Component {
             // Final Frame & 1st or 2nd Roll are not normal
             if (this.props.currentFrame === (this.props.gameFrameTotal - 1)) {
                 const finalRollTypes = this.props.player1.frames[this.props.currentFrame].rolls.map(cur=>{return cur.type});
-                console.log(`final roll types: ${finalRollTypes}`)
                 finalRollTypes.includes('spare', 'strike') ? value = 20 : value = 10
             }
             return value
@@ -88,7 +87,7 @@ class Bowling extends Component {
             //  we need to set strike roll attempts to 2 for displaying the score properly. 
             const rollIncrement = ()=>{
                 let value = 1;
-                if (rollType() === 'strike' && (this.props.currentFrame !== this.props.gameFrameTotal - 1)){
+                if (rollType() === 'strike' && (this.props.currentFrame !== this.props.gameFrameTotal-1)){
                     value = 2;
                 }
                 return value;
@@ -129,9 +128,7 @@ class Bowling extends Component {
                 return baseScore + additionalPoints;
             }
             const scoreBasedOnRolls = (roll) => {
-                console.log(`score based on roll ${roll}`);
                 switch (roll) {
-   
                     // roll type on most right refers to current frame,
                     // text on left refers to prvious frames. 
                     case 'strike-normal':
@@ -145,7 +142,6 @@ class Bowling extends Component {
                     case 'normal-strike':
                         addValues([updatedFrames[currentFrame].rolls[0]], 10, (currentFrame));
                         addValues(updatedFrames[currentFrame].rolls, 10, (currentFrame));
-                  
                         break;
                     case 'strike':
                     case 'strike-strike':
@@ -187,7 +183,6 @@ class Bowling extends Component {
             }
             // creates overall frame roll type
             const convertToSingleType = (val) => {
-                console.log(`Value to be converted : ${val}`);
                 switch (val) {
                     // normal -- without a second roll
                     case 'normal-':
